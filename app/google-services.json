@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "670134601904",
+    "project_id": "swipe-video-app-33f88",
+    "storage_bucket": "swipe-video-app-33f88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670134601904:android:cdb6d3b688653817b29375",
+        "android_client_info": {
+          "package_name": "com.example.swipe_video_app_for_android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaO3YMaMXMXA-TtbpX6b4BCAzmu4hNdyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
