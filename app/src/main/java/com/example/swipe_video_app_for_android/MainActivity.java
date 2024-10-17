@@ -148,9 +148,11 @@ class VideoAdapter extends RecyclerView.Adapter<VideoViewHolder> {
  * ViewHolder class that manages the view and data binding for each video item.
  */
 class VideoViewHolder extends RecyclerView.ViewHolder {
-    TextView textVideoTitle, textVideoId, textVideoDescription;
-    VideoView videoView;
-    ProgressBar progressBar;
+    private final TextView TEXT_VIDEO_TITLE;
+    private final TextView TEXT_VIDEO_ID;
+    private final TextView TEXT_VIDEO_DESCRIPTION;
+    private final VideoView VIDEO_VIEW;
+    private final ProgressBar PROGRESSBAR;
 
     /**
      * Constructor for VideoViewHolder.
@@ -159,11 +161,11 @@ class VideoViewHolder extends RecyclerView.ViewHolder {
      */
     public VideoViewHolder(@NonNull View itemView) {
         super(itemView);
-        videoView = itemView.findViewById(R.id.videoView);
-        textVideoTitle = itemView.findViewById(R.id.textVideoTitle);
-        textVideoId = itemView.findViewById(R.id.textVideoID);
-        textVideoDescription = itemView.findViewById(R.id.textVideoDescription);
-        progressBar = itemView.findViewById(R.id.videoProgressBar);
+        VIDEO_VIEW = itemView.findViewById(R.id.videoView);
+        TEXT_VIDEO_TITLE = itemView.findViewById(R.id.textVideoTitle);
+        TEXT_VIDEO_ID = itemView.findViewById(R.id.textVideoID);
+        TEXT_VIDEO_DESCRIPTION = itemView.findViewById(R.id.textVideoDescription);
+        PROGRESSBAR = itemView.findViewById(R.id.videoProgressBar);
     }
 
     /**
@@ -172,19 +174,19 @@ class VideoViewHolder extends RecyclerView.ViewHolder {
      * @param videoItem The video item containing the data to display.
      */
     public void setVideoData(VideoItem videoItem) {
-        textVideoTitle.setText(videoItem.title);
-        textVideoId.setText(videoItem.id);
-        textVideoDescription.setText(videoItem.description);
-        videoView.setVideoPath(videoItem.videoUrl);
+        TEXT_VIDEO_TITLE.setText(videoItem.title);
+        TEXT_VIDEO_ID.setText(videoItem.id);
+        TEXT_VIDEO_DESCRIPTION.setText(videoItem.description);
+        VIDEO_VIEW.setVideoPath(videoItem.videoUrl);
 
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        VIDEO_VIEW.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 onVideoPrepared(mp);
             }
         });
 
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        VIDEO_VIEW.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 onVideoCompletion(mp);
@@ -199,13 +201,13 @@ class VideoViewHolder extends RecyclerView.ViewHolder {
      * @param mp The MediaPlayer instance representing the prepared video.
      */
     public void onVideoPrepared(MediaPlayer mp) {
-        progressBar.setVisibility(View.GONE);
+        PROGRESSBAR.setVisibility(View.GONE);
         mp.start();
 
         // Adjust video scaling to fit the screen
         float videoRatio = mp.getVideoWidth() / (float) mp.getVideoHeight();
-        float screenRatio = videoView.getWidth() / (float) videoView.getHeight();
-        videoView.setScaleX(videoRatio / screenRatio >= 1f ? videoRatio / screenRatio : 1f / (videoRatio / screenRatio));
+        float screenRatio = VIDEO_VIEW.getWidth() / (float) VIDEO_VIEW.getHeight();
+        VIDEO_VIEW.setScaleX(videoRatio / screenRatio >= 1f ? videoRatio / screenRatio : 1f / (videoRatio / screenRatio));
     }
 
     /**
