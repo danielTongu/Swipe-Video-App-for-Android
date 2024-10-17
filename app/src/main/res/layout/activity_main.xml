@@ -19,7 +19,7 @@
         android:id="@+id/errorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Error loading videoItems."
+        android:text="Error loading videos."
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

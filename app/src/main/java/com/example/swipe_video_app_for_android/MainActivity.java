@@ -24,8 +24,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * MainActivity class that sets up the ViewPager2 to display swipeable videos.
+ * MainActivity class that sets up the ViewPager2 to display videos to swipe.
  * Supports manually inputted URLs and handles lifecycle events to release VideoView resources.
+ *
+ * @author Daniel Tongu
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -50,24 +52,27 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize ViewPager with video list
         ViewPager2 viewPager = findViewById(R.id.VideosViewPager);
-        List<VideoItem> videoItemList = Arrays.asList(
-                new VideoItem("DNLFV1", "Brooks Library", "A random piece of art.",
-                        "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2Fsampson.mp4?alt=media&token=5f02185d-1a03-4e74-8d4d-da6f0daed7d1"),
-                new VideoItem("DNLFV2", "Video 2", "Borrowed for demo purposes.",
-                        "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2Fhobbsgrove.mp4?alt=media&token=11215306-d377-4ece-a3ec-14ba6c019e3b"),
-                new VideoItem("DNLFV3", "Video 3", "Another demo video.",
-                        "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2Fsampson.mp4?alt=media&token=5f02185d-1a03-4e74-8d4d-da6f0daed7d1")
+        List<Video> videoList = Arrays.asList(
+                new Video("ID: DNLFV01", "12 Man", "Seahawks flag up on the mountain.",
+                        "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2F12man.MP4?alt=media&token=e45bd1d8-5b62-47fc-9cb7-875c0998fe1e"),
+                new Video("ID: DNLFV02", "Lights", "Discolights at a friends party.",
+                        "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2Fdiscolights.MOV?alt=media&token=df505942-46f6-4d00-b91c-0396f56e254e"),
+                new Video("ID: DNLFV03", "Snow car", "Aftermath of a snow storm in CWU.",
+                        "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2Fsnowcar.mov?alt=media&token=f9ba2091-0e26-4276-a883-05bc24c16e17")
         );
-        viewPager.setAdapter(new VideoAdapter(videoItemList));
+
+        viewPager.setAdapter(new VideoAdapter(videoList));
         Toast.makeText(this, "Videos loaded", Toast.LENGTH_SHORT).show();
     }
 }
 
 /**
- * VideoItem class that represents each video with its ID, title, description, and URL.
+ * Video class that represents a video with its ID, title, description, and URL.
  * Implements Serializable to allow passing Video objects in Bundles.
+ *
+ * @author Daniel Tongu
  */
-class VideoItem implements Serializable {
+class Video implements Serializable {
     /**Unique ID of the video*/
     public final String id;
     /**Title of the video*/
@@ -78,14 +83,14 @@ class VideoItem implements Serializable {
     public final String videoUrl;
 
     /**
-     * Constructor for the VideoItem class.
+     * Constructor for the Video class.
      *
      * @param id          The unique ID of the video
      * @param title       The title of the video
      * @param description The description of the video
      * @param videoUrl    The URL of the video to be played
      */
-    public VideoItem(String id, String title, String description, String videoUrl) {
+    public Video(String id, String title, String description, String videoUrl) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -94,18 +99,20 @@ class VideoItem implements Serializable {
 }
 
 /**
- * Adapter class to manage video items in the ViewPager2.
+ * Adapter class to manage videos in the ViewPager2.
+ *
+ * @author Daniel Tongu
  */
 class VideoAdapter extends RecyclerView.Adapter<VideoViewHolder> {
-    private final List<VideoItem> videoItems;
+    private final List<Video> videoList;
 
     /**
      * Constructor for VideoAdapter.
      *
-     * @param videoItems The list of video items to display
+     * @param videoList The list of videos to display
      */
-    public VideoAdapter(List<VideoItem> videoItems) {
-        this.videoItems = videoItems;
+    public VideoAdapter(List<Video> videoList) {
+        this.videoList = videoList;
     }
 
     /**
@@ -130,22 +137,24 @@ class VideoAdapter extends RecyclerView.Adapter<VideoViewHolder> {
      */
     @Override
     public void onBindViewHolder(@NonNull VideoViewHolder holder, int position) {
-        holder.setVideoData(videoItems.get(position));
+        holder.setVideoData(videoList.get(position));
     }
 
     /**
      * Returns the total number of items in the data set held by the adapter.
      *
-     * @return The total number of video items.
+     * @return The total number of videos.
      */
     @Override
     public int getItemCount() {
-        return videoItems.size();
+        return videoList.size();
     }
 }
 
 /**
  * ViewHolder class that manages the view and data binding for each video item.
+ *
+ * @author Daniel Tongu
  */
 class VideoViewHolder extends RecyclerView.ViewHolder {
     private final TextView TEXT_VIDEO_TITLE;
@@ -157,7 +166,7 @@ class VideoViewHolder extends RecyclerView.ViewHolder {
     /**
      * Constructor for VideoViewHolder.
      *
-     * @param itemView The view that represents the video item.
+     * @param itemView The view that represents the video.
      */
     public VideoViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -171,13 +180,13 @@ class VideoViewHolder extends RecyclerView.ViewHolder {
     /**
      * Sets the video data (title, description, video URL) for the ViewHolder.
      *
-     * @param videoItem The video item containing the data to display.
+     * @param video The video containing the data to display.
      */
-    public void setVideoData(VideoItem videoItem) {
-        TEXT_VIDEO_TITLE.setText(videoItem.title);
-        TEXT_VIDEO_ID.setText(videoItem.id);
-        TEXT_VIDEO_DESCRIPTION.setText(videoItem.description);
-        VIDEO_VIEW.setVideoPath(videoItem.videoUrl);
+    public void setVideoData(Video video) {
+        TEXT_VIDEO_TITLE.setText(video.title);
+        TEXT_VIDEO_ID.setText(video.id);
+        TEXT_VIDEO_DESCRIPTION.setText(video.description);
+        VIDEO_VIEW.setVideoPath(video.videoUrl);
 
         VIDEO_VIEW.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
