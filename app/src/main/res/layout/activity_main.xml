@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- ViewPager2 for displaying the swipeable video list -->
+    <!-- ViewPager2 for displaying the video list -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/VideosViewPager"
         android:layout_width="match_parent"
