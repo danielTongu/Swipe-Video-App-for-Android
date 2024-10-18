@@ -53,13 +53,22 @@ public class MainActivity extends AppCompatActivity {
         // Initialize ViewPager with video list
         ViewPager2 viewPager = findViewById(R.id.VideosViewPager);
         List<Video> videoList = Arrays.asList(
-                new Video("ID: DNLFV01", "12 Man", "Seahawks flag up on the mountain.",
+                new Video("ID: DNLFV01", "Samson", "Aftermath of a snow storm in CWU.",
+                        "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2Fsampson.mp4?alt=media&token=7934d17d-8ed4-4d3c-aecd-2baf720d7961"),
+
+                new Video("ID: DNLFV02", "12 Man", "Seahawks flag up on the mountain.",
                         "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2F12man.MP4?alt=media&token=e45bd1d8-5b62-47fc-9cb7-875c0998fe1e"),
-                new Video("ID: DNLFV02", "Lights", "Discolights at a friends party.",
+
+                new Video("ID: DNLFV03", "Hobbs Grove", "",
+                        "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2Fhobbsgrove.mp4?alt=media&token=cbd7dd9f-db1a-46be-9223-c027cb51d189"),
+
+                new Video("ID: DNLFV04", "Lights", "Discolights at a friends party.",
                         "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2Fdiscolights.MOV?alt=media&token=df505942-46f6-4d00-b91c-0396f56e254e"),
-                new Video("ID: DNLFV03", "Snow car", "Aftermath of a snow storm in CWU.",
+
+                new Video("ID: DNLFV05", "Snow car", "Aftermath of a snow storm in CWU.",
                         "https://firebasestorage.googleapis.com/v0/b/swipe-video-app-33f88.appspot.com/o/videos%2Fsnowcar.mov?alt=media&token=f9ba2091-0e26-4276-a883-05bc24c16e17")
-        );
+
+                );
 
         viewPager.setAdapter(new VideoAdapter(videoList));
         Toast.makeText(this, "Videos loaded", Toast.LENGTH_SHORT).show();
